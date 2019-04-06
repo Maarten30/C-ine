@@ -10,7 +10,14 @@
 
 int main(void)
 {
-	printf("Hola mundo");
+	printf("Hola mundo\n");
+
+	char c = '5';
+
+	int x = c - '0';
+
+	printf("El numero es %i\n", x);
+
 
 	char caracter;
 
