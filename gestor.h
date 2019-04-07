@@ -9,6 +9,6 @@
 #define GESTOR_H_
 
 void menuGestor();
-void añadirPelicula();
+void anyadirPelicula();
 
 #endif /* GESTOR_H_ */

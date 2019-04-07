@@ -13,11 +13,11 @@ int main(void)
 {
 	printf("Hola mundo\n");
 
-	char c = '5';
-
-	int x = c - '0';
-
-	printf("El numero es %i\n", x);
+//	char c = '5';
+//
+//	int x = c - '0';
+//
+//	printf("El numero es %i\n", x);
 
 	Cartelera cart;
 
@@ -31,8 +31,9 @@ int main(void)
 	cart.peliculas[1].titulo = "Bambi";
 
 	printf("Llega aqui\n");
+	printf("%s\n", cart.peliculas[0].titulo);
 
-	ficheroCartelera(cart);
+//	ficheroCartelera(cart);
 
 	char caracter;
 
@@ -46,10 +47,10 @@ int main(void)
 
 		if(caracter == 'g')
 		{
-			menuGestor();
+			menuGestor(cart);
 		}else if(caracter == '1'){
 
-
+			imprimirCartelera(cart);
 		}
 
 

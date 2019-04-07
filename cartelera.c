@@ -10,7 +10,10 @@
 
 void imprimirCartelera(Cartelera cart)
 {
-
+	for (int i =0; i<cart.numPelis;i++)
+	{
+		printf("Cine: %s, Pelicula: %s, Descripcion: %s\n", cart.cine, cart.peliculas[i].titulo, cart.peliculas[i].descripcion);
+	}
 }
 
 void ficheroCartelera(Cartelera cart)

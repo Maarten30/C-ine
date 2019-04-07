@@ -8,6 +8,6 @@
 
 void imprimirPelicula(Pelicula peli)
 {
-
+	printf("%s, Descripcion: %s\n", peli.titulo, peli.descripcion);
 }
 
