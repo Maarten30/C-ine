@@ -6,6 +6,7 @@
  */
 #include <stdio.h>
 #include "gestor.h"
+#include "cartelera.h"
 
 
 int main(void)
@@ -18,6 +19,20 @@ int main(void)
 
 	printf("El numero es %i\n", x);
 
+	Cartelera cart;
+
+	cart.cine = "urbil";
+
+	cart.numPelis = 2;
+
+	cart.peliculas = malloc (sizeof(Pelicula)*2);
+
+	cart.peliculas[0].titulo = "Interstellar";
+	cart.peliculas[1].titulo = "Bambi";
+
+	printf("Llega aqui\n");
+
+	ficheroCartelera(cart);
 
 	char caracter;
 
@@ -32,6 +47,9 @@ int main(void)
 		if(caracter == 'g')
 		{
 			menuGestor();
+		}else if(caracter == '1'){
+
+
 		}
 
 

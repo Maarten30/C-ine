@@ -6,12 +6,52 @@
  */
 #include "cartelera.h"
 #include <stdio.h>
+#include <string.h>
 
 void imprimirCartelera(Cartelera cart)
 {
 
 }
 
+void ficheroCartelera(Cartelera cart)
+{
+	FILE *f;
+	char *cine;
+
+	printf("Llega aqui2\n");
+
+//	cine = cart.cine;
+//	strcat(cine, "Cartelera.txt");
+
+	printf("Llega aqui3\n");
+
+	f = fopen("CarteleraUrbil.txt", "w+");
+
+	char *cine2 = cart.cine;
+
+	int lonCharCine = strlen(cine2);
+
+	printf("Llega aqui4\n");
+
+	fprintf(f, lonCharCine);
+	fprintf(f, cart.cine);
+	fprintf(f, cart.numPelis);
+	int lonPeli = 0;
+
+	printf("Llega aqui5\n");
+
+	for(int i=0; i<cart.numPelis; i++)
+	{
+
+		lonPeli = strlen(cart.peliculas[i].titulo);
+		fprintf(f, lonPeli);
+		fprintf(f, "%s", cart.peliculas[i].titulo);
+
+	}
+
+
+
+}
 Cartelera leerCartelera()
 {
 	Cartelera cart;

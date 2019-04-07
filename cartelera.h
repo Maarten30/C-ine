@@ -27,5 +27,6 @@ typedef struct
 
 } Sesion;
 
+void ficheroCartelera(Cartelera cart);
 void imprimirCartelera(Cartelera cart);
 #endif /* CARTELERA_H_ */
