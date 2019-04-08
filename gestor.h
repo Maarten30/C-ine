@@ -6,9 +6,11 @@
  */
 
 #ifndef GESTOR_H_
-#define GESTOR_H_
+#define GESTOR_H
+
 
 void menuGestor();
 void anyadirPelicula();
+void quitarPelicula();
 
 #endif /* GESTOR_H_ */
