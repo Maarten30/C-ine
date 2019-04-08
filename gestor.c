@@ -11,6 +11,7 @@
 #include "pelicula.h"
 #include"cartelera.h"
 #include "gestor.h"
+
 #define TAMANYO_tit 100
 #define TAMANYO_descr 200
 
@@ -35,9 +36,9 @@ void menuGestor(Cartelera *cart)
 
 			peli.titulo = malloc((strlen(titulo)+1)*sizeof(char));
 			peli.titulo = strcpy(peli.titulo, titulo);
-			printf("El título que has introducido es: %s", titulo);
+			printf("El titulo que has introducido es: %s", titulo);
 
-			char *descr=malloc(TAMANYO_descr*sizeof(char));
+			char *descr = malloc(TAMANYO_descr*sizeof(char));
 			fflush(stdin);
 
 			printf("Inserte la descripcion de la pelicula %s\n", peli.titulo);
@@ -45,14 +46,14 @@ void menuGestor(Cartelera *cart)
 
 			peli.descripcion = malloc((strlen(descr)+1)*sizeof(char));
 			peli.descripcion = strcpy(peli.descripcion, descr);
-			printf("La descripción que has introducido es: %s", descr);
+			printf("La descripcion que has introducido es: %s", descr);
 			anyadirPelicula(cart,peli);
 		}
 		else if(caracter == '2')
 		{
 			Pelicula *PeliABorrar = malloc(1*sizeof(Pelicula));
 //			imprimirCartelera(cart);
-			printf("Introduce el titulo de la película que quieres borrar:\n");
+			printf("Introduce el titulo de la pelï¿½cula que quieres borrar:\n");
 
 			char *tituloABorrar=malloc(TAMANYO_tit*sizeof(char));
 			fflush(stdin);
@@ -61,7 +62,7 @@ void menuGestor(Cartelera *cart)
 			PeliABorrar->descripcion = malloc((strlen(tituloABorrar)+1)*sizeof(char));
 			PeliABorrar->descripcion = strcpy(peli.descripcion, tituloABorrar);
 
-			printf("¿Estás seguro? Pulsa 's'= SI // 'n'=NO: %s");
+			printf("ï¿½Estï¿½s seguro? Pulsa 's'= SI // 'n'=NO: %s");
 			char opcion;
 			scanf("%c", opcion);
 			if (opcion == 's')
