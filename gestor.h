@@ -10,6 +10,7 @@
 
 
 void menuGestor();
+void NuevaCartelera();
 int exists(const char *fname); //metodo para comprobar si un archivo txt existe
 
 #endif /* GESTOR_H_ */

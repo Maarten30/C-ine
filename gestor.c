@@ -74,6 +74,10 @@ void menuGestor(Cartelera *cart)
 			{
 				menuGestor(cart);
 			}
+		}else if(caracter == '3')
+		{
+			NuevaCartelera();
+
 		}
 
 	}while(caracter!='q');
@@ -82,35 +86,64 @@ void menuGestor(Cartelera *cart)
 
 void NuevaCartelera()
 {
-	Cartelera cart;
 
-	char *cine;
+	printf("Ha entrado en el metodo nuevo\n");
+	Cartelera *cart = malloc(sizeof(Cartelera));
+
+	char cine[TAMANYO_tit];
 	printf("Introduzca el nombre del cine: \n");
 	scanf("%s", cine);
 
 	int numPelis = 0;
 	printf("Introduzca el numero de peliculas que desea anyadir a la cartelera: \n");
-	scanf("%i", numPelis);
+	scanf("%i", &numPelis);
 
-	cart.cine = cine;
-	cart.numPelis = numPelis;
+	cart->cine = malloc (sizeof(char)*TAMANYO_tit);
+	strcpy(cart->cine, cine);
 
-	for(int i=0; i<cart.numPelis; i++)
+
+
+	cart->numPelis = numPelis;
+
+	cart->peliculas = malloc(sizeof(Pelicula)*numPelis);
+
+
+
+	char titulo[TAMANYO_tit];
+	char desc[TAMANYO_descr];
+	int longitud = 0;
+	int longitud2 = 0;
+
+	for(int i=0; i<cart->numPelis; i++)
 	{
-		char *titulo;
+
 		printf("Introduzca el titulo de la pelicula: \n");
 		scanf("%s", titulo);
+		longitud = strlen(titulo);
 
-		char *desc;
+		printf("%i\n", longitud);
+
+
+
 		printf("Introduzca una breve descripcion sobre la pelicula: \n");
 		scanf("%s", desc);
+		longitud2 = strlen(desc);
 
-		cart.peliculas[i].titulo = titulo;
-		cart.peliculas[i].descripcion = desc;
+		printf("Llega111\n");
+
+		cart->peliculas[i].titulo= malloc (sizeof(char)*(longitud+1));
+		cart->peliculas[i].descripcion = malloc (sizeof(char)*(longitud2+1));
+
+		printf("Llega122\n");
+
+		strcpy(cart->peliculas[i].titulo, titulo);
+		strcpy(cart->peliculas[i].descripcion, desc);
+
+		printf("Llega123\n");
 
 	}
 
-	ficheroCartelera(cart);
+	ficheroCartelera(*cart);
 
 }
 
