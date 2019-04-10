@@ -111,3 +111,49 @@ Cartelera leerCartelera()
 	return cart;
 
 }
+
+void anyadirPelicula(Cartelera *cartelera, Pelicula peli)
+{
+	int numPelis2 = cartelera->numPelis+1;
+	Cartelera *carte = (Cartelera*)malloc(numPelis2* sizeof(Cartelera));
+
+	for(int i = 0; i<numPelis2;i++)
+	{
+		if (i==numPelis2-1)
+		{
+			(carte->peliculas[i]).titulo = peli.titulo;
+			(carte->peliculas[i]).descripcion = peli.descripcion;
+		}
+		else
+		{
+			(carte->peliculas[i]).titulo = (cartelera->peliculas[i]).titulo;
+			(carte->peliculas[i]).descripcion = (cartelera->peliculas[i]).descripcion;
+		}
+	}
+
+	cartelera->numPelis=numPelis2;
+	cartelera->peliculas = carte->peliculas;
+	printf("La pelicula se ha anyadido a la cartelera\n");
+
+}
+
+
+void quitarPelicula(Cartelera *cartelera, Pelicula PeliABorrar)
+{
+	int numPelis2 = cartelera->numPelis +1;
+	Cartelera *carte = (Cartelera*)malloc(numPelis2* sizeof(Cartelera));
+
+	for(int i=0; i<numPelis2; i++)
+	{
+		if(strcpy(PeliABorrar.titulo, (carte->peliculas[i]).titulo))
+		{
+			(carte->peliculas[i]).titulo = (carte->peliculas[i-1].titulo);
+			(carte->peliculas[i]).descripcion = (carte->peliculas[i-1]).descripcion;
+			numPelis2--;
+		}
+	}
+
+	cartelera->numPelis = numPelis2;
+	printf("La pelicula se ha borrado de la cartelera\n");
+}
+

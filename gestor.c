@@ -9,13 +9,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include "pelicula.h"
-#include"cartelera.h"
+#include "cartelera.h"
 #include "gestor.h"
 
 #define TAMANYO_tit 100
 #define TAMANYO_descr 200
 
 void menuGestor(Cartelera *cart)
+//el menuGestor creo que no deberia recibir una cartelera (opinion)
 {
 	char caracter;
 	Pelicula peli;
@@ -53,7 +54,7 @@ void menuGestor(Cartelera *cart)
 		{
 			Pelicula *PeliABorrar = malloc(1*sizeof(Pelicula));
 //			imprimirCartelera(cart);
-			printf("Introduce el titulo de la pel�cula que quieres borrar:\n");
+			printf("Introduce el titulo de la pelicula que quieres borrar:\n");
 
 			char *tituloABorrar=malloc(TAMANYO_tit*sizeof(char));
 			fflush(stdin);
@@ -62,12 +63,12 @@ void menuGestor(Cartelera *cart)
 			PeliABorrar->descripcion = malloc((strlen(tituloABorrar)+1)*sizeof(char));
 			PeliABorrar->descripcion = strcpy(peli.descripcion, tituloABorrar);
 
-			printf("�Est�s seguro? Pulsa 's'= SI // 'n'=NO: %s");
+			printf("Estas seguro? Pulsa 's'= SI // 'n'=NO: %s");
 			char opcion;
 			scanf("%c", opcion);
 			if (opcion == 's')
 			{
-				quitarPelicula(cart, &PeliABorrar);
+				quitarPelicula(cart, *PeliABorrar);
 			}
 			else if (opcion == 'n')
 			{
@@ -79,47 +80,48 @@ void menuGestor(Cartelera *cart)
 
 }
 
-void anyadirPelicula(Cartelera *cartelera, Pelicula peli)
+void NuevaCartelera()
 {
-	int numPelis2 = cartelera->numPelis+1;
-	Cartelera *carte = (Cartelera*)malloc(numPelis2* sizeof(Cartelera));
+	Cartelera cart;
 
-	for(int i = 0; i<numPelis2;i++)
+	char *cine;
+	printf("Introduzca el nombre del cine: \n");
+	scanf("%s", cine);
+
+	int numPelis = 0;
+	printf("Introduzca el numero de peliculas que desea anyadir a la cartelera: \n");
+	scanf("%i", numPelis);
+
+	cart.cine = cine;
+	cart.numPelis = numPelis;
+
+	for(int i=0; i<cart.numPelis; i++)
 	{
-		if (i==numPelis2-1)
-		{
-			(carte->peliculas[i]).titulo = peli.titulo;
-			(carte->peliculas[i]).descripcion = peli.descripcion;
-		}
-		else
-		{
-			(carte->peliculas[i]).titulo = (cartelera->peliculas[i]).titulo;
-			(carte->peliculas[i]).descripcion = (cartelera->peliculas[i]).descripcion;
-		}
+		char *titulo;
+		printf("Introduzca el titulo de la pelicula: \n");
+		scanf("%s", titulo);
+
+		char *desc;
+		printf("Introduzca una breve descripcion sobre la pelicula: \n");
+		scanf("%s", desc);
+
+		cart.peliculas[i].titulo = titulo;
+		cart.peliculas[i].descripcion = desc;
+
 	}
 
-	cartelera->numPelis=numPelis2;
-	cartelera->peliculas = carte->peliculas;
-	printf("La pelicula se ha anyadido a la cartelera\n");
+	ficheroCartelera(cart);
 
 }
 
-
-void quitarPelicula(Cartelera *cartelera, Pelicula PeliABorrar)
+int exists(const char *fname)
 {
-	int numPelis2 = cartelera->numPelis +1;
-	Cartelera *carte = (Cartelera*)malloc(numPelis2* sizeof(Cartelera));
-
-	for(int i=0; i<numPelis2; i++)
-	{
-		if(strcpy(PeliABorrar.titulo, (carte->peliculas[i]).titulo))
-		{
-			(carte->peliculas[i]).titulo = (carte->peliculas[i-1].titulo);
-			(carte->peliculas[i]).descripcion = (carte->peliculas[i-1]).descripcion;
-			numPelis2--;
-		}
-	}
-
-	cartelera->numPelis = numPelis2;
-	printf("La pelicula se ha borrado de la cartelera\n");
+    FILE *file;
+    if ((file = fopen(fname, "r")))
+    {
+        fclose(file);
+        return 1;
+    }
+    return 0;
 }
+
