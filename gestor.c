@@ -24,7 +24,7 @@ void menuGestor(Cartelera *cart)
 	do
 	{
 		printf("Menu Gestor: \n");
-		printf("1.- Anyadir Pelicula\n2.- Retirar Pelicula\n");
+		printf("1.- Anyadir Pelicula\n2.- Retirar Pelicula\n3.- Crear cartelera nueva\n");
 		scanf(" %c", &caracter);
 		printf("%c\n", caracter);
 		if(caracter == '1')
@@ -87,7 +87,6 @@ void menuGestor(Cartelera *cart)
 void NuevaCartelera()
 {
 
-	printf("Ha entrado en el metodo nuevo\n");
 	Cartelera *cart = malloc(sizeof(Cartelera));
 
 	char cine[TAMANYO_tit];
@@ -126,20 +125,14 @@ void NuevaCartelera()
 
 
 		printf("Introduzca una breve descripcion sobre la pelicula: \n");
-		scanf("%s", desc);
+		scanf(" %[^\t\n]s", desc);
 		longitud2 = strlen(desc);
-
-		printf("Llega111\n");
 
 		cart->peliculas[i].titulo= malloc (sizeof(char)*(longitud+1));
 		cart->peliculas[i].descripcion = malloc (sizeof(char)*(longitud2+1));
 
-		printf("Llega122\n");
-
 		strcpy(cart->peliculas[i].titulo, titulo);
 		strcpy(cart->peliculas[i].descripcion, desc);
-
-		printf("Llega123\n");
 
 	}
 

@@ -50,9 +50,16 @@ int main(void)
 		{
 			menuGestor(cart);
 		}
-		else if(caracter == '1'){
+		else if(caracter == '1')
+		{
 
-			imprimirCartelera(cart);
+			leerCartelera();
+			//imprimirCartelera(cart);
+		}else if(caracter == '2')
+		{
+			int lineas = lineasFichero();
+			printf("El numero de lineas del fichero es: %i", lineas);
+
 		}
 
 

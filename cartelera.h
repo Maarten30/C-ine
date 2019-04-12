@@ -31,4 +31,5 @@ void ficheroCartelera(Cartelera cart);
 void imprimirCartelera(Cartelera cart);
 void anyadirPelicula(Cartelera *cartelera, Pelicula peli);
 void quitarPelicula(Cartelera *cartelera, Pelicula PeliABorrar);
+int lineasFichero();
 #endif /* CARTELERA_H_ */
