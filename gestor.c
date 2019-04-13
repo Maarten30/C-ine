@@ -22,7 +22,6 @@ void menuGestor()
 	char caracter;
 	char caracter2;
 	Pelicula peli;
-	Cartelera carte;
 
 	do
 	{
@@ -109,6 +108,7 @@ void menuGestor()
 		}
 		else if(caracter == '2')
 		{
+
 			NuevaCartelera();
 
 		}
@@ -123,9 +123,11 @@ void NuevaCartelera()
 	Cartelera *cart = malloc(sizeof(Cartelera));
 
 	char cine[TAMANYO_tit];
+	char aux[TAMANYO_tit];
 	printf("Introduzca el nombre del cine: \n");
-	scanf("%s", cine);
-	int existe = exists(cine);
+	scanf("%s", aux);
+	strcpy(cine,aux);
+	int existe = exists(strcat(aux, "Cartelera.txt"));
 	if (existe ==1)
 	{
 		printf("Esta cartelera ya existe.\n");
