@@ -83,28 +83,28 @@ Cartelera leerCartelera(char *cine)
 
 	cart.peliculas = malloc(sizeof(Pelicula)*numPelis);
 
-
 	char buff[255];
+
 
 	fscanf(f, "%s", buff);
 	strcpy(cart.cine, buff);
 
-
-	while((ch = fgetc(f)) != EOF)
+	for(int i=0; i<numPelis; i++)
 	{
-		cart.peliculas[contador].titulo = malloc (sizeof(char)*TAMANYO_tit);
-		fscanf(f, "%s", buff);
-		strcpy(cart.peliculas[contador].titulo,buff);
+		printf("aquiiii\n");
+		cart.peliculas[i].titulo = malloc (sizeof(char)*TAMANYO_tit);
+		fscanf(f, " %[^\t\n]s", buff);
+		strcpy(cart.peliculas[i].titulo,buff);
 
-		cart.peliculas[contador].titulo = malloc (sizeof(char)*TAMANYO_descr);
-		fscanf(f, "%s", buff);
-		strcpy(cart.peliculas[contador].descripcion,buff);
-
-		contador++;
+		printf("aquiiii2\n");
+		cart.peliculas[i].descripcion = malloc (sizeof(char)*TAMANYO_descr);
+		fscanf(f, " %[^\t\n]s", buff);
+		printf("%s\n", buff);
+		strcpy(cart.peliculas[i].descripcion,buff);
 
 	}
 
-	cart.numPelis = contador;
+
 
 	return cart;
 
