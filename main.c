@@ -54,7 +54,7 @@ int main(void)
 
 			Cartelera cartel;
 			cartel = leerCartelera("GML");
-			imprimirCartelera(cart);
+			imprimirCartelera(cartel);
 
 		}else if(caracter == '2')
 		{
