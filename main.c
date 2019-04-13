@@ -45,18 +45,20 @@ int main(void)
 		scanf(" %c", &caracter);
 		printf("%c\n", caracter);
 
-		if(caracter == 'g')
+		if(caracter == 'g' || caracter == 'G')
 		{
 			menuGestor();
 		}
 		else if(caracter == '1')
 		{
 
-			leerCartelera();
+			Cartelera cartel;;
+			cartel = leerCartelera("GML");
 			imprimirCartelera(cart);
+
 		}else if(caracter == '2')
 		{
-			int lineas = lineasFichero();
+			int lineas = lineasFichero("Madrid");
 			printf("El numero de lineas del fichero es: %i", lineas);
 
 		}

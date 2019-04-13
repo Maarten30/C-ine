@@ -29,7 +29,8 @@ typedef struct
 
 void ficheroCartelera(Cartelera cart);
 void imprimirCartelera(Cartelera cart);
+Cartelera leerCartelera(char *cine);
 void anyadirPelicula(Cartelera *cartelera, Pelicula peli);
 void quitarPelicula(Cartelera *cartelera, Pelicula PeliABorrar);
-int lineasFichero();
+int lineasFichero(char *fichero);
 #endif /* CARTELERA_H_ */

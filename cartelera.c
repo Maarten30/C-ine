@@ -59,24 +59,26 @@ void ficheroCartelera(Cartelera cart)
 
 
 }
-Cartelera leerCartelera()
+Cartelera leerCartelera(char *cine)
 {
 	Cartelera cart;
 	FILE *f;
 	char ch;
+	char fichero[100];
 	//int lonCharCine;
 	int numPelis = 0;
 	int contador = 0;
-	int lonTitulo;
-	int lonDescripcion;
 
-	f = fopen("MadridCartelera.txt", "r");
+	strcpy(fichero, cine);
+	strcat(fichero, "Cartelera.txt");
+
+	f = fopen(fichero, "r");
 
 	//lonCharCine = ch - '0';
 
 	cart.cine = malloc(sizeof(char)*TAMANYO_tit);
 
-	numPelis = (lineasFichero()-1)/2;
+	numPelis = (lineasFichero(fichero)-1)/2;
 	cart.numPelis = numPelis;
 
 	cart.peliculas = malloc(sizeof(Pelicula)*numPelis);
@@ -105,44 +107,6 @@ Cartelera leerCartelera()
 	cart.numPelis = contador;
 
 	return cart;
-
-//	for(int i=0; i<lonCharCine; i++)
-//	{
-//		ch = getc(f);
-//		cart.cine[i] = ch;
-//	}
-//
-//	ch = getc(f);
-//	numPelis = ch -'0';
-//
-//	cart.numPelis = numPelis;
-//
-//	cart.peliculas = malloc(sizeof(Pelicula)*numPelis);
-//
-//
-//
-//	for(int i=0; i<numPelis; i++)
-//	{
-//		ch = getc(f);
-//		lonTitulo = ch -'0';
-//		cart.peliculas[i].titulo = malloc(sizeof(char)*lonTitulo);
-//		for(int j=0; j<lonTitulo; j++)
-//		{
-//			ch = getc(f);
-//			cart.peliculas[i].titulo[j] = ch;
-//		}
-//
-//		ch = getc(f);
-//		lonDescripcion = ch -'0';
-//		cart.peliculas[i].descripcion = malloc(sizeof(char)*lonDescripcion);
-//		for(int j=0; j<lonDescripcion; j++)
-//		{
-//			ch = getc(f);
-//			cart.peliculas[i].descripcion[j] = ch;
-//		}
-//	}
-
-	//return cart;
 
 }
 
@@ -191,13 +155,13 @@ void quitarPelicula(Cartelera *cartelera, Pelicula PeliABorrar)
 	printf("La pelicula se ha borrado de la cartelera\n");
 }
 
-int lineasFichero()
+int lineasFichero(char *fichero)
 {
     FILE *fileptr;
     int count_lines = 0;
     char filechar[40], chr;
 
-    fileptr = fopen("MadridCartelera.txt", "r");
+    fileptr = fopen(fichero, "r");
    //extract character from file and store in chr
     chr = getc(fileptr);
     while (chr != EOF)
