@@ -58,7 +58,7 @@ int main(void)
 
 		}else if(caracter == '2')
 		{
-			int lineas = lineasFichero("Madrid");
+			int lineas = lineasFichero("MadridCartelera.txt");
 			printf("El numero de lineas del fichero es: %i", lineas);
 
 		}
