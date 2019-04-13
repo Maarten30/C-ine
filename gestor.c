@@ -12,6 +12,7 @@
 #include "cartelera.h"
 #include "gestor.h"
 
+#define TAMANYO_cine 100;
 #define TAMANYO_tit 100
 #define TAMANYO_descr 200
 
@@ -20,6 +21,7 @@ void menuGestor()
 {
 	char caracter;
 	Pelicula peli;
+	Cartelera carte;
 
 	do
 	{
@@ -29,26 +31,33 @@ void menuGestor()
 		printf("%c\n", caracter);
 		if(caracter == '1')
 		{
+
 			char *titulo=malloc(TAMANYO_tit*sizeof(char));
 			fflush(stdin);
+//			char *cine= malloc (TAMANYO_cine*sizeof(char));
+
+			printf("Inserte el nombre del cine en el que desee anyadir la pelicula\n");
+//			scanf(" %s", cine);
 
 			printf("Inserte el nombre de la pelicula que desee anyadir\n");
-			fgets(titulo,TAMANYO_tit,stdin);
+			scanf(" %s", titulo);
+//			fgets(titulo,TAMANYO_tit,stdin);
 
 			peli.titulo = malloc((strlen(titulo)+1)*sizeof(char));
 			peli.titulo = strcpy(peli.titulo, titulo);
-			printf("El titulo que has introducido es: %s", titulo);
+			printf("El titulo que has introducido es: %s\n", titulo);
 
 			char *descr = malloc(TAMANYO_descr*sizeof(char));
 			fflush(stdin);
 
 			printf("Inserte la descripcion de la pelicula %s\n", peli.titulo);
-			fgets(descr,TAMANYO_descr,stdin);
+//			fgets(descr,TAMANYO_descr,stdin);
+			scanf(" %s", descr);
 
 			peli.descripcion = malloc((strlen(descr)+1)*sizeof(char));
 			peli.descripcion = strcpy(peli.descripcion, descr);
-			printf("La descripcion que has introducido es: %s", descr);
-			//anyadirPelicula(cart,peli);
+			printf("La descripcion que has introducido es: %s\n", descr);
+//			anyadirPelicula(carte, peli);
 		}
 		else if(caracter == '2')
 		{

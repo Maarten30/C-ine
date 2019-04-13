@@ -12,7 +12,6 @@
 
 int main(void)
 {
-	printf("Hola mundo\n");
 
 //	char c = '5';
 //
