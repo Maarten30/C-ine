@@ -45,7 +45,7 @@ void menuGestor()
 			}
 			else
 			{
-				printf("1.- Anyadir pelicula \n 2.- Retirar pelicula\n");
+				printf("1.- Anyadir pelicula \n2.- Retirar pelicula\n");
 				scanf(" %c", &caracter2);
 				printf("%c\n", caracter2);
 
@@ -125,7 +125,6 @@ void NuevaCartelera()
 	char cine[TAMANYO_tit];
 	printf("Introduzca el nombre del cine: \n");
 	scanf("%s", cine);
-	strcat(cine, "Cartelera.txt");
 	int existe = exists(cine);
 	if (existe ==1)
 	{
