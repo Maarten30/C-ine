@@ -4,6 +4,7 @@
  *  Created on: Apr 6, 2019
  *      Author: maarten
  */
+#include <stdlib.h>
 #include "cartelera.h"
 #include <stdio.h>
 #include <string.h>
@@ -112,25 +113,37 @@ Cartelera leerCartelera(char *cine)
 
 void anyadirPelicula(Cartelera *cartelera, Pelicula peli)
 {
-	int numPelis2 = cartelera->numPelis+1;
-	Cartelera *carte = (Cartelera*)malloc(numPelis2* sizeof(Cartelera));
 
-	for(int i = 0; i<numPelis2;i++)
+	int aux =0;
+	int aux2 = cartelera->numPelis;
+	aux = cartelera->numPelis+1;
+
+	Pelicula *more_peliculas = realloc(cartelera->peliculas, aux*sizeof(Pelicula));
+	cartelera->numPelis = cartelera->numPelis+1;
+
+
+
+	for(int i = 0; i<cartelera->numPelis; i++)
 	{
-		if (i==numPelis2-1)
+		if (i==aux2)
 		{
-			(carte->peliculas[i]).titulo = peli.titulo;
-			(carte->peliculas[i]).descripcion = peli.descripcion;
-		}
-		else
-		{
-			(carte->peliculas[i]).titulo = (cartelera->peliculas[i]).titulo;
-			(carte->peliculas[i]).descripcion = (cartelera->peliculas[i]).descripcion;
+
+			//cartelera->peliculas[i] = malloc(sizeof(Pelicula));
+			more_peliculas[i].titulo = malloc(sizeof(char)*TAMANYO_tit);
+			more_peliculas[i].descripcion = malloc(sizeof(char)*TAMANYO_descr);
+			strcpy(more_peliculas[i].titulo, peli.titulo);
+			strcpy(more_peliculas[i].descripcion, peli.descripcion);
 		}
 	}
 
-	cartelera->numPelis=numPelis2;
-	cartelera->peliculas = carte->peliculas;
+
+	cartelera->peliculas = more_peliculas;
+
+
+	ficheroCartelera(*cartelera);
+
+
+
 	printf("La pelicula se ha anyadido a la cartelera\n");
 
 }
