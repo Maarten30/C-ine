@@ -8,11 +8,12 @@
 #include <stdlib.h>
 #include "gestor.h"
 #include "cartelera.h"
+#include <string.h>
 
 #define TAMANYO_descr 200
 #define TAMANYO_titulo 100
 
-
+void comprarEntradas();
 
 int main(void)
 {
@@ -67,10 +68,11 @@ int main(void)
 			anyadirPelicula(&cartel, *Lora);
 			imprimirCartelera(cartel);
 
-		}else if(caracter == '2')
+		}
+		else if(caracter == '2')
 		{
-			int lineas = lineasFichero("MadridCartelera.txt");
-			printf("El numero de lineas del fichero es: %i", lineas);
+
+			comprarEntradas();
 
 		}
 
@@ -79,6 +81,51 @@ int main(void)
 
 }
 
+void comprarEntradas()
+{
+	printf("Elija el cine: \n");
+	char *nombrecart = malloc(TAMANYO_titulo*sizeof(char));
+	scanf("%s", nombrecart);
+	printf("%s", nombrecart);
+	for (int i = 0; i < strlen(nombrecart); i++)
+	{
+	    nombrecart[i] = toupper(nombrecart[i]);
+	}
+	printf(nombrecart);
+	strcat(nombrecart, "Cartelera.txt");
+	int existe = exists(nombrecart);
+	Cartelera cart = leerCartelera(nombrecart);
+
+	if (existe ==0)
+	{
+		printf("El cine introducido no existe, vuelva a introducirlo:\n");
+		comprarEntradas();
+	}
+	else
+	{
+		imprimirCartelera(cart);
+		printf("Elija la pelicula:\n ");
+		char *nombrePeli;
+		for(int i=0; i<cart.numPelis; i++)
+		{
+			printf("%s\n", cart.peliculas[i].titulo);
+		}
+		scanf("%s", nombrePeli);
+		printf("¿Esta seguro de que quiere comprarla?\nS(Si)\nN(No)");
+		char c;
+		scanf("%c", &c);
+		if(c=='S'|| c=='s')
+		{
+			printf("Compra realizada");
+		}
+		else if(c=='N' || c=='n')
+		{
+			printf("Operacion cancelada");
+			comprarEntradas();
+		}
+
+	}
+}
 
 
 
