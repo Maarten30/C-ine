@@ -48,13 +48,13 @@ int main(void)
 
 		if(caracter == 'g')
 		{
-			menuGestor(cart);
+			menuGestor();
 		}
 		else if(caracter == '1')
 		{
 
 			leerCartelera();
-			//imprimirCartelera(cart);
+			imprimirCartelera(cart);
 		}else if(caracter == '2')
 		{
 			int lineas = lineasFichero();

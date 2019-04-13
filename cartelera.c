@@ -76,7 +76,7 @@ Cartelera leerCartelera()
 
 	cart.cine = malloc(sizeof(char)*TAMANYO_tit);
 
-	numPelis = lineasFichero()-1;
+	numPelis = (lineasFichero()-1)/2;
 	cart.numPelis = numPelis;
 
 	cart.peliculas = malloc(sizeof(Pelicula)*numPelis);

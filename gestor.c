@@ -15,7 +15,7 @@
 #define TAMANYO_tit 100
 #define TAMANYO_descr 200
 
-void menuGestor(Cartelera *cart)
+void menuGestor()
 //el menuGestor creo que no deberia recibir una cartelera (opinion)
 {
 	char caracter;
@@ -48,7 +48,7 @@ void menuGestor(Cartelera *cart)
 			peli.descripcion = malloc((strlen(descr)+1)*sizeof(char));
 			peli.descripcion = strcpy(peli.descripcion, descr);
 			printf("La descripcion que has introducido es: %s", descr);
-			anyadirPelicula(cart,peli);
+			//anyadirPelicula(cart,peli);
 		}
 		else if(caracter == '2')
 		{
@@ -68,11 +68,11 @@ void menuGestor(Cartelera *cart)
 			scanf("%c", opcion);
 			if (opcion == 's')
 			{
-				quitarPelicula(cart, *PeliABorrar);
+				//quitarPelicula(cart, *PeliABorrar);
 			}
 			else if (opcion == 'n')
 			{
-				menuGestor(cart);
+				menuGestor();
 			}
 		}else if(caracter == '3')
 		{
