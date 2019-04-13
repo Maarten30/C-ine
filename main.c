@@ -6,9 +6,9 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "gestor.h"
 #include "cartelera.h"
-#include <string.h>
 
 #define TAMANYO_descr 200
 #define TAMANYO_titulo 100
@@ -18,34 +18,26 @@ void comprarEntradas();
 int main(void)
 {
 
-//	char c = '5';
+//	Cartelera cart;
 //
-//	int x = c - '0';
+//	cart.cine = "urbil";
+//	cart.numPelis = 2;
 //
-//	printf("El numero es %i\n", x);
-
-	Cartelera cart;
-
-	cart.cine = "urbil";
-	cart.numPelis = 2;
-
-	cart.peliculas = malloc (sizeof(Pelicula)*2);
-
-	cart.peliculas[0].titulo = "Interstellar";
-	cart.peliculas[0].descripcion = "Va de estrellas";
-	cart.peliculas[1].titulo = "Bambi";
-	cart.peliculas[1].descripcion = "Va de un ciervo";
-
-	printf("Llega aqui\n");
-	printf("%s\n", cart.peliculas[0].titulo);
-
-//	ficheroCartelera(cart);
+//	cart.peliculas = malloc (sizeof(Pelicula)*2);
+//
+//	cart.peliculas[0].titulo = "Interstellar";
+//	cart.peliculas[0].descripcion = "Va de estrellas";
+//	cart.peliculas[1].titulo = "Bambi";
+//	cart.peliculas[1].descripcion = "Va de un ciervo";
+//
+//	printf("Llega aqui\n");
+//	printf("%s\n", cart.peliculas[0].titulo);
 
 	char caracter;
 
 	do
 	{
-		printf("\nMenu Principal: \n");
+		printf("Menu Principal: \n");
 		printf("1.- Cartelera\n2.- Compra de entradas\n");
 		scanf(" %c", &caracter);
 		printf("%c\n", caracter);
@@ -71,27 +63,25 @@ int main(void)
 		}
 		else if(caracter == '2')
 		{
-
 			comprarEntradas();
-
 		}
 
-
-	}while(caracter!='q');
-
+	}
+	while(caracter!='q');
 }
 
 void comprarEntradas()
 {
-	printf("Elija el cine: \n");
 	char *nombrecart = malloc(TAMANYO_titulo*sizeof(char));
+	printf("Elija el cine:\n");
 	scanf("%s", nombrecart);
 	printf("%s", nombrecart);
+
 	for (int i = 0; i < strlen(nombrecart); i++)
 	{
 	    nombrecart[i] = toupper(nombrecart[i]);
 	}
-	printf(nombrecart);
+
 	strcat(nombrecart, "Cartelera.txt");
 	int existe = exists(nombrecart);
 	Cartelera cart = leerCartelera(nombrecart);
@@ -103,9 +93,9 @@ void comprarEntradas()
 	}
 	else
 	{
+		char *nombrePeli = malloc(TAMANYO_titulo*sizeof(char));
 		imprimirCartelera(cart);
 		printf("Elija la pelicula:\n ");
-		char *nombrePeli;
 		for(int i=0; i<cart.numPelis; i++)
 		{
 			printf("%s\n", cart.peliculas[i].titulo);
