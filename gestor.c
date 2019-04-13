@@ -12,7 +12,7 @@
 #include "cartelera.h"
 #include "gestor.h"
 
-#define TAMANYO_cine 100;
+
 #define TAMANYO_tit 100
 #define TAMANYO_descr 200
 
@@ -31,13 +31,14 @@ void menuGestor()
 		printf("%c\n", caracter);
 		if(caracter == '1')
 		{
-
+			char *cinema = malloc(TAMANYO_tit*sizeof(char));
 			char *titulo=malloc(TAMANYO_tit*sizeof(char));
 			fflush(stdin);
-//			char *cine= malloc (TAMANYO_cine*sizeof(char));
+
 
 			printf("Inserte el nombre del cine en el que desee anyadir la pelicula\n");
-//			scanf(" %s", cine);
+			scanf(" %s", cinema);
+
 
 			printf("Inserte el nombre de la pelicula que desee anyadir\n");
 			scanf(" %s", titulo);
