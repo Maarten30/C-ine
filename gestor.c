@@ -33,10 +33,22 @@ void menuGestor()
 		{
 			printf("Elige el cine que quiera editar:\n");
 			char *nombrecart;
+			char *nombrecart2 = malloc(TAMANYO_tit*sizeof(char));
 			nombrecart = malloc(TAMANYO_tit*sizeof(char));
 			scanf("%s", nombrecart);
+			strcpy(nombrecart2, nombrecart);
+			for (int i = 0; i < strlen(nombrecart); i++)
+			{
+			    nombrecart[i] = toupper(nombrecart[i]);
+			    nombrecart2[i] = toupper(nombrecart2[i]);
+			}
+			//toupper((unsigned char) *nombrecart);
+			printf("%s", nombrecart);
+			//strupr(nombrecart);
+			//strupr(nombrecart2);
 			strcat(nombrecart, "Cartelera.txt");
 			int existe = exists(nombrecart);
+
 			if (existe ==0)
 			{
 				printf("El cine introducido no existe, vuelva a introducirlo:\n");
@@ -44,38 +56,40 @@ void menuGestor()
 			}
 			else
 			{
+				Cartelera cartelerita = leerCartelera(nombrecart2);
 				printf("1.- Anyadir pelicula \n2.- Retirar pelicula\n");
 				scanf(" %c", &caracter2);
 				printf("%c\n", caracter2);
 
 				if(caracter2 == '1')
 				{
+					Pelicula peli1;
 					char *cinema = malloc(TAMANYO_tit*sizeof(char));
 					char *titulo=malloc(TAMANYO_tit*sizeof(char));
+					char *descr = malloc(TAMANYO_descr*sizeof(char));
 					fflush(stdin);
 
 
-					printf("Inserte el nombre del cine en el que desee anyadir la pelicula\n");
-					scanf(" %s", cinema);
 
 					printf("Inserte el nombre de la pelicula que desee anyadir\n");
 
 					scanf(" %s", titulo);
-//					fgets(titulo,TAMANYO_tit,stdin);
-					peli.titulo = malloc((strlen(titulo)+1)*sizeof(char));
-					peli.titulo = strcpy(peli.titulo, titulo);
+					peli1.titulo = malloc((strlen(titulo)+1)*sizeof(char));
+					peli1.titulo = strcpy(peli1.titulo, titulo);
 					printf("El titulo que has introducido es: %s\n", titulo);
 
-					char *descr = malloc(TAMANYO_descr*sizeof(char));
+
 					fflush(stdin);
 
-					printf("Inserte la descripcion de la pelicula %s\n", peli.titulo);
+					printf("Inserte la descripcion de la pelicula %s\n", peli1.titulo);
 					//fgets(descr,TAMANYO_descr,stdin);
 					scanf(" %s", descr);
 
-					peli.descripcion = malloc((strlen(descr)+1)*sizeof(char));
-					peli.descripcion = strcpy(peli.descripcion, descr);
+					peli1.descripcion = malloc((strlen(descr)+1)*sizeof(char));
+					peli1.descripcion = strcpy(peli1.descripcion, descr);
 					printf("La descripcion que has introducido es: %s\n", descr);
+
+					anyadirPelicula(&cartelerita, peli1);
 	//				anyadirPelicula(carte, peli);
 				}
 				else if (caracter2=='2')

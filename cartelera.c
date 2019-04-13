@@ -26,7 +26,14 @@ void ficheroCartelera(Cartelera cart)
 
 	printf("Llega aqui2\n");
 
+
+
 	strcpy(cine, cart.cine);
+	for (int i = 0; i < strlen(cine); i++)
+	{
+		cine[i] = toupper(cine[i]);
+	}
+	//strupr(cine);
 	strcat(cine, "Cartelera.txt");
 
 	printf("Llega aqui3\n");
