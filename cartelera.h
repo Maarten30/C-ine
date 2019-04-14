@@ -18,15 +18,6 @@ typedef struct
 
 } Cartelera;
 
-typedef struct
-{
-	char *peli;
-	Pelicula *peliculas;
-	int sitios;
-
-
-} Sesion;
-
 void ficheroCartelera(Cartelera cart);
 void imprimirCartelera(Cartelera cart);
 Cartelera leerCartelera(char *cine);

@@ -64,6 +64,8 @@ void menuGestor()
 				if(caracter2 == '1')
 				{
 					Pelicula peli1;
+					int sesiones = 0;
+					double hora = 0.0;
 					char *cinema = malloc(TAMANYO_tit*sizeof(char));
 					char *titulo=malloc(TAMANYO_tit*sizeof(char));
 					char *descr = malloc(TAMANYO_descr*sizeof(char));
@@ -73,7 +75,7 @@ void menuGestor()
 
 					printf("Inserte el nombre de la pelicula que desee anyadir\n");
 
-					scanf(" %s", titulo);
+					scanf(" %[^\t\n]s", titulo);
 					peli1.titulo = malloc((strlen(titulo)+1)*sizeof(char));
 					peli1.titulo = strcpy(peli1.titulo, titulo);
 					printf("El titulo que has introducido es: %s\n", titulo);
@@ -83,11 +85,28 @@ void menuGestor()
 
 					printf("Inserte la descripcion de la pelicula %s\n", peli1.titulo);
 					//fgets(descr,TAMANYO_descr,stdin);
-					scanf(" %s", descr);
+					scanf(" %[^\t\n]s", descr);
 
 					peli1.descripcion = malloc((strlen(descr)+1)*sizeof(char));
 					peli1.descripcion = strcpy(peli1.descripcion, descr);
 					printf("La descripcion que has introducido es: %s\n", descr);
+
+					printf("Cuantas sesiones diarias quiere tener de la pelicula %s?\n", peli1.titulo);
+					scanf("%i", &sesiones);
+
+					peli1.sesiones = malloc(sizeof(Sesion)*sesiones);
+					peli1.numSesiones = sesiones;
+
+					for(int i=0; i<sesiones; i++)
+					{
+						printf("Introduzca la hora de la sesion %i:\n", i);
+						scanf("%lf", &hora);
+						printf("Dentro del for la hora es %lf\n", hora);
+						peli1.sesiones[i].hora = hora;
+						peli1.sesiones[i].plazas = 22;
+					}
+
+					printf("La primera sesion es a las %lf\n", peli1.sesiones[0].hora);
 
 					anyadirPelicula(&cartelerita, peli1);
 	//				anyadirPelicula(carte, peli);
@@ -168,18 +187,38 @@ void NuevaCartelera()
 		char desc[TAMANYO_descr];
 		int longitud = 0;
 		int longitud2 = 0;
+		int sesiones = 0;
+		double hora = 0.0;
 
 		for(int i=0; i<cart->numPelis; i++)
 		{
 
 			printf("Introduzca el titulo de la pelicula: \n");
-			scanf("%s", titulo);
+			scanf(" %[^\t\n]s", titulo);
 			longitud = strlen(titulo);
 			printf("%i\n", longitud);
 
 			printf("Introduzca una breve descripcion sobre la pelicula: \n");
 			scanf(" %[^\t\n]s", desc);
 			longitud2 = strlen(desc);
+
+			printf("Cuantas sesiones diarias quiere tener de la pelicula %s?\n", titulo);
+			scanf("%i", &sesiones);
+
+			cart->peliculas[i].sesiones = malloc(sizeof(Sesion)*sesiones);
+			cart->peliculas[i].numSesiones = sesiones;
+
+			for(int j=0; j<sesiones; j++)
+			{
+				printf("Introduzca la hora de la sesion %j:\n", i);
+				scanf("%lf", &hora);
+				printf("Dentro del for la hora es %lf\n", hora);
+				cart->peliculas[i].sesiones[j].hora = hora;
+				cart->peliculas[i].sesiones[j].plazas = 22;
+			}
+
+
+
 
 			cart->peliculas[i].titulo= malloc (sizeof(char)*(longitud+1));
 			cart->peliculas[i].descripcion = malloc (sizeof(char)*(longitud2+1));
@@ -188,6 +227,8 @@ void NuevaCartelera()
 			strcpy(cart->peliculas[i].descripcion, desc);
 
 		}
+
+		printf("La primera sesion es a las %lf\n", cart->peliculas[0].sesiones[0].hora);
 
 		ficheroCartelera(*cart);
 

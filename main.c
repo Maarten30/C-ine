@@ -50,14 +50,8 @@ int main(void)
 		{
 
 			Cartelera cartel;
-			cartel = leerCartelera("GML");
+			cartel = leerCartelera("SANSE");
 
-			Pelicula *Lora=(Pelicula*)malloc(sizeof(Pelicula));
-			Lora->descripcion=malloc(TAMANYO_descr*sizeof(char));
-			Lora -> titulo = malloc(TAMANYO_titulo*sizeof(char));
-			Lora->descripcion = "porseaca";
-			Lora->titulo = "Lora";
-			anyadirPelicula(&cartel, *Lora);
 			imprimirCartelera(cartel);
 
 		}
