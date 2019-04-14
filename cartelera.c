@@ -34,6 +34,8 @@ void ficheroCartelera(Cartelera cart)
 
 	printf("Llega aqui2\n");
 
+	printf("La hora de irse a casa es: %lf\n", cart.peliculas[8].sesiones[0].hora);
+
 
 
 	strcpy(cine, cart.cine);
@@ -54,11 +56,8 @@ void ficheroCartelera(Cartelera cart)
 
 	printf("Llega aqui4\n");
 
-//	fprintf(f, lonCharCine);
 	fprintf(f, cart.cine);
 	fprintf(f, "\n");
-//	fprintf(f, cart.numPelis);
-//	int lonPeli = 0;
 
 
 	for(int i=0; i<cart.numPelis; i++)
@@ -70,12 +69,13 @@ void ficheroCartelera(Cartelera cart)
 		fprintf(f, "\n");
 
 		fprintf(f, "%i ", cart.peliculas[i].numSesiones);
+		printf("El numero de sesionazas es: %i\n", cart.peliculas[i].numSesiones);
 
 		for(int j=0; j<cart.peliculas[i].numSesiones; j++)
 		{
 
 			fprintf(f, "%lf ", cart.peliculas[i].sesiones[j].hora);
-
+			printf("La hora de irse a casa es: %lf\n", cart.peliculas[i].sesiones[j].hora);
 		}
 
 		fprintf(f, "\n");
@@ -96,10 +96,7 @@ Cartelera leerCartelera(char *cine)
 	int numPelis = 0;
 	int contador = 0;
 
-//	for (int i = 0; i < strlen(cine); i++)
-//	{
-//		cine[i] = toupper(cine[i]);
-//	}
+
 
 
 	strcpy(fichero, cine);
@@ -195,11 +192,23 @@ void anyadirPelicula(Cartelera *cartelera, Pelicula peli)
 			more_peliculas[i].descripcion = malloc(sizeof(char)*TAMANYO_descr);
 			strcpy(more_peliculas[i].titulo, peli.titulo);
 			strcpy(more_peliculas[i].descripcion, peli.descripcion);
+			more_peliculas[i].sesiones = malloc(sizeof(Sesion)*peli.numSesiones);
+			more_peliculas[i].numSesiones = peli.numSesiones;
+			printf("El numero de seeees es %i\n", peli.numSesiones);
+			for(int j=0; j<peli.numSesiones; j++)
+			{
+				more_peliculas[i].sesiones[j].hora=peli.sesiones[j].hora;
+				printf("La sesion tiene una hora de: %lf\n", peli.sesiones[j].hora);
+				more_peliculas[i].sesiones[j].plazas=peli.sesiones[j].plazas;
+
+			}
 		}
 	}
 
 
 	cartelera->peliculas = more_peliculas;
+
+	printf("Dime la horaa: %lf", cartelera->peliculas[6].sesiones[0].hora);
 
 
 	ficheroCartelera(*cartelera);
@@ -211,23 +220,66 @@ void anyadirPelicula(Cartelera *cartelera, Pelicula peli)
 }
 
 
-void quitarPelicula(Cartelera *cartelera, Pelicula PeliABorrar)
+void ficheroCarteleraBorrado(Cartelera cart, int index)
 {
-	int numPelis2 = cartelera->numPelis +1;
-	Cartelera *carte = (Cartelera*)malloc(numPelis2* sizeof(Cartelera));
+	FILE *f;
+	char cine[100];
 
-	for(int i=0; i<numPelis2; i++)
+	printf("Llega aqui2\n");
+
+
+	strcpy(cine, cart.cine);
+	for (int i = 0; i < strlen(cine); i++)
 	{
-		if(strcpy(PeliABorrar.titulo, (carte->peliculas[i]).titulo))
+		cine[i] = toupper(cine[i]);
+	}
+	//strupr(cine);
+	strcat(cine, "Cartelera.txt");
+
+	printf("Llega aqui3\n");
+
+	f = fopen(cine, "w+");
+
+	char *cine2 = cart.cine;
+
+	int lonCharCine = strlen(cine2);
+
+	printf("Llega aqui4\n");
+
+	fprintf(f, cart.cine);
+	fprintf(f, "\n");
+
+
+	for(int i=0; i<cart.numPelis; i++)
+	{
+
+		printf("El index es %i", index);
+		if(i!=index)
 		{
-			(carte->peliculas[i]).titulo = (carte->peliculas[i-1].titulo);
-			(carte->peliculas[i]).descripcion = (carte->peliculas[i-1]).descripcion;
-			numPelis2--;
+			fprintf(f, "%s", cart.peliculas[i].titulo);
+			fprintf(f, "\n");
+			fprintf(f, "%s", cart.peliculas[i].descripcion);
+			fprintf(f, "\n");
+
+			fprintf(f, "%i ", cart.peliculas[i].numSesiones);
+
+			for(int j=0; j<cart.peliculas[i].numSesiones; j++)
+			{
+
+				fprintf(f, "%lf ", cart.peliculas[i].sesiones[j].hora);
+
+			}
+
+			fprintf(f, "\n");
 		}
+
+
+
 	}
 
-	cartelera->numPelis = numPelis2;
-	printf("La pelicula se ha borrado de la cartelera\n");
+	fclose(f);
+
+
 }
 
 int lineasFichero(char *fichero)

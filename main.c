@@ -48,9 +48,19 @@ int main(void)
 		}
 		else if(caracter == '1')
 		{
+			char *cine;
+			printf("Elija el cine del que desea ver la cartelera: ");
+
+			scanf("%s", cine);
 
 			Cartelera cartel;
-			cartel = leerCartelera("SANSE");
+			for (int i = 0; i < strlen(cine); i++)
+			{
+				cine[i] = toupper(cine[i]);
+			}
+
+			printf("EL nombre del cine es: %s", cine);
+			cartel = leerCartelera(cine);
 
 			imprimirCartelera(cartel);
 

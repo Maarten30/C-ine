@@ -24,4 +24,5 @@ Cartelera leerCartelera(char *cine);
 void anyadirPelicula(Cartelera *cartelera, Pelicula peli);
 void quitarPelicula(Cartelera *cartelera, Pelicula PeliABorrar);
 int lineasFichero(char *fichero);
+void ficheroCarteleraBorrado(Cartelera cart, int index);
 #endif /* CARTELERA_H_ */

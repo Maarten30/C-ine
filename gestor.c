@@ -113,28 +113,87 @@ void menuGestor()
 				}
 				else if (caracter2=='2')
 				{
-					Pelicula *PeliABorrar = malloc(1*sizeof(Pelicula));
-//					imprimirCartelera(cart);
-					printf("Introduce el titulo de la pelicula que quieres borrar:\n");
+					int indice=0;
 
-					char *tituloABorrar=malloc(TAMANYO_tit*sizeof(char));
-					fflush(stdin);
-					fgets(tituloABorrar,TAMANYO_tit,stdin);
+					printf("Escoja la pelicula a borrar\n");
 
-					PeliABorrar->descripcion = malloc((strlen(tituloABorrar)+1)*sizeof(char));
-					PeliABorrar->descripcion = strcpy(peli.descripcion, tituloABorrar);
+					printf("EL primer horario es: %lf\n", cartelerita.peliculas[2].sesiones[0].hora);
 
-					printf("Estas seguro? Pulsa 's'= SI // 'n'=NO: %s");
-					char opcion;
-					scanf("%c", opcion);
-					if (opcion == 's')
+					for(int i=0; i<cartelerita.numPelis; i++)
 					{
-						//quitarPelicula(cart, *PeliABorrar);
+						printf("Titulo: %s\n", cartelerita.peliculas[i].titulo);
 					}
-					else if (opcion == 'n')
+
+					char *titulo = malloc(sizeof(char)*TAMANYO_tit);
+					printf("Asd\n");
+					scanf(" %[^\t\n]s", titulo);
+
+					printf("dfs2\n");
+					for (int i = 0; i < strlen(titulo); i++)
 					{
-						menuGestor();
+						titulo[i] = toupper(titulo[i]);
 					}
+					printf("dfs\n");
+					char *titulo2= malloc(sizeof(char)*TAMANYO_tit);
+
+					for(int i=0; i<cartelerita.numPelis; i++)
+					{
+						strcpy(titulo2, cartelerita.peliculas[i].titulo);
+						for (int j = 0; j < strlen(titulo2); j++)
+						{
+							titulo2[j] = toupper(titulo2[j]);
+						}
+						if(strcmp(titulo, titulo2) == 0)
+						{
+							indice=i;
+							printf("El indice es %i", indice);
+							break;
+						}
+					}
+
+					ficheroCarteleraBorrado(cartelerita, indice);
+					printf("mahandy\n");
+
+//					Cartelera cart;
+//
+//					cart.cine = malloc(sizeof(char)*TAMANYO_tit);
+//					strcpy(cart.cine, cartelerita.cine);
+//					printf("mahandyyy\n");
+//					cart.numPelis = cartelerita.numPelis-1;
+//					printf("mahandy1\n");
+//					cart.peliculas = malloc(sizeof(Pelicula)*cart.numPelis);
+//					printf("mahandyyy5\n");
+//					double hora = 0.0;
+//					for(int i =0; i<cartelerita.numPelis;i++)
+//					{
+//						if(i!=indice)
+//						{
+//							cart.peliculas[i].titulo = malloc(sizeof(char)*TAMANYO_tit);
+//							cart.peliculas[i].descripcion = malloc(sizeof(char)*TAMANYO_descr);
+//							strcpy(cart.peliculas[i].titulo, cartelerita.peliculas[i].titulo);
+//							strcpy(cart.peliculas[i].descripcion, cartelerita.peliculas[i].descripcion);
+//							cart.peliculas[i].numSesiones = cartelerita.peliculas[i].numSesiones;
+//							cart.peliculas[i].sesiones = malloc(sizeof(Sesion)*cart.peliculas[i].numSesiones);
+//							printf("mahandyyy6\n");
+//							for(int j=0; j<cart.peliculas[i].numSesiones; j++)
+//							{
+//								printf("Hola soy Lora\n");
+//								//cart.peliculas[i].sesiones[j].plazas = cartelerita.peliculas[i].sesiones[j].plazas;
+//
+//								hora= cartelerita.peliculas[i].sesiones[j].hora;
+//								printf("Hola soy Lora3\n");
+//								cart.peliculas[i].sesiones[j].hora = hora;
+//								printf("Hola soy Lora2\n");
+//							}
+//
+//
+//						}
+//					}
+//					printf("mahandy2\n");
+
+
+//					ficheroCartelera(cart);
+
 			}
 
 			}
