@@ -48,6 +48,8 @@ int main(void)
 
 			imprimirCartelera(cartel);
 
+			free(cine);
+
 		}
 		else if(caracter == '2')
 		{
