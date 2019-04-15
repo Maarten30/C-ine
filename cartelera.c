@@ -34,7 +34,6 @@ void ficheroCartelera(Cartelera cart)
 
 	printf("Llega aqui2\n");
 
-	printf("La hora de irse a casa es: %lf\n", cart.peliculas[8].sesiones[0].hora);
 
 	strcpy(cine, cart.cine);
 	for (int i = 0; i < strlen(cine); i++)
