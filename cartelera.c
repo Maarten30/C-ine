@@ -207,6 +207,7 @@ void ficheroCarteleraBorrado(Cartelera cart, int index)
 
 			for(int j=0; j<cart.peliculas[i].numSesiones; j++)
 			{
+				fprintf(f, "%i ", cart.peliculas[i].sesiones[j].plazas);
 				fprintf(f, "%lf ", cart.peliculas[i].sesiones[j].hora);
 			}
 			fprintf(f, "\n");
