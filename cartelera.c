@@ -25,7 +25,8 @@ void imprimirCartelera(Cartelera cart)
 		printf("Sesiones:\n");
 		for(int j=0; j<cart.peliculas[i].numSesiones; j++)
 		{
-			printf("Hora: %.2f ", cart.peliculas[i].sesiones[j].hora);
+			printf("Hora: %.2f, ", cart.peliculas[i].sesiones[j].hora);
+			printf("Sitios libres: %i || ", cart.peliculas[i].sesiones[j].plazas);
 		}
 		printf("\n");
 
@@ -75,7 +76,7 @@ void ficheroCartelera(Cartelera cart)
 
 		for(int j=0; j<cart.peliculas[i].numSesiones; j++)
 		{
-
+			fprintf(f, "%i ", cart.peliculas[i].sesiones[j].plazas);
 			fprintf(f, "%lf ", cart.peliculas[i].sesiones[j].hora);
 			printf("La hora de irse a casa es: %lf\n", cart.peliculas[i].sesiones[j].hora);
 		}
@@ -118,6 +119,7 @@ Cartelera leerCartelera(char *cine)
 
 	char buff[255];
 	double hora=0.0;
+	int plazas = 0;
 	int numSesiones = 0;
 	char c;
 
@@ -151,8 +153,11 @@ Cartelera leerCartelera(char *cine)
 
 		for(int j=0; j<numSesiones;j++)
 		{
+			fscanf(f, "%i", &plazas);
 			fscanf(f, "%lf", &hora);
+			cart.peliculas[i].sesiones[j].plazas = plazas;
 			cart.peliculas[i].sesiones[j].hora = hora;
+
 		}
 	}
 	return cart;

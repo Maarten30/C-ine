@@ -87,26 +87,92 @@ void comprarEntradas()
 	}
 	else
 	{
-		char *nombrePeli = malloc(TAMANYO_titulo*sizeof(char));
-		imprimirCartelera(cart);
-		printf("Elija la pelicula:\n ");
+		int indice=0;
+		int indSesion=-1;
+		int numEntradas=0;
+		double hora = 0.0;
+
+		printf("Escoja el titulo de la pelicula que desea ver: \n");
+
 		for(int i=0; i<cart.numPelis; i++)
 		{
-			printf("%s\n", cart.peliculas[i].titulo);
+			printf("Titulo: %s\n", cart.peliculas[i].titulo);
 		}
-		scanf("%s", nombrePeli);
-		printf("¿Esta seguro de que quiere comprarla?\nS(Si)\nN(No)");
-		char c;
-		scanf("%c", &c);
-		if(c=='S'|| c=='s')
+
+		char *titulo = malloc(sizeof(char)*TAMANYO_titulo);
+		printf("Asd\n");
+		scanf(" %[^\t\n]s", titulo);
+
+		printf("dfs2\n");
+		for (int i = 0; i < strlen(titulo); i++)
 		{
-			printf("Compra realizada");
+			titulo[i] = toupper(titulo[i]);
 		}
-		else if(c=='N' || c=='n')
+		printf("dfs\n");
+		char *titulo2= malloc(sizeof(char)*TAMANYO_titulo);
+
+		for(int i=0; i<cart.numPelis; i++)
 		{
-			printf("Operacion cancelada");
-			comprarEntradas();
+			strcpy(titulo2, cart.peliculas[i].titulo);
+			for (int j = 0; j < strlen(titulo2); j++)
+			{
+				titulo2[j] = toupper(titulo2[j]);
+			}
+			if(strcmp(titulo, titulo2) == 0)
+			{
+				indice=i;
+				printf("El indice es %i\n", indice);
+				break;
+			}
 		}
+
+
+		do
+		{
+			for(int j=0; j<cart.peliculas[indice].numSesiones; j++)
+			{
+				printf("Hora: %.2f || ", cart.peliculas[indice].sesiones[j].hora);
+				printf("Sitios libres: %i\n", cart.peliculas[indice].sesiones[j].plazas);
+			}
+			printf("Escoja el horario al que desea ver la pelicula: \n");
+					scanf("%lf", &hora);
+
+					for(int j=0; j<cart.peliculas[indice].numSesiones; j++)
+					{
+						if(hora == cart.peliculas[indice].sesiones[j].hora)
+						{
+							indSesion = j;
+						}
+					}
+			if(indSesion==-1)
+			{
+				printf("Escoja un horario valido:\n");
+			}
+		}while(indSesion == -1);
+
+
+		do
+		{
+			printf("Introduzca el numero de entradas que desea comprar: ");
+			scanf("%i", &numEntradas);
+			if(numEntradas<=0)
+			{
+				printf("El numero de entradas debe ser superior a 0\n");
+			}
+			if(numEntradas<=cart.peliculas[indice].sesiones[indSesion].plazas && numEntradas>0)
+			{
+				cart.peliculas[indice].sesiones[indSesion].plazas = cart.peliculas[indice].sesiones[indSesion].plazas-numEntradas;
+				printf("La compra se ha realizado correctamente\n");
+			}
+			if(numEntradas>cart.peliculas[indice].sesiones[indSesion].plazas)
+			{
+				printf("La plazas disponibles son unicamente de: %i\n", cart.peliculas[indice].sesiones[indSesion].plazas);
+			}
+		}while(numEntradas<=0 || numEntradas>cart.peliculas[indice].sesiones[indSesion].plazas);
+
+
+
+		ficheroCartelera(cart);
 
 	}
 }
