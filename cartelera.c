@@ -163,11 +163,12 @@ void anyadirPelicula(Cartelera *cartelera, Pelicula peli)
 
 	cartelera->peliculas = more_peliculas;
 
-	printf("Dime la hora: %lf", cartelera->peliculas[6].sesiones[0].hora);
 
 	ficheroCartelera(*cartelera);
 
 	printf("La pelicula se ha anyadido a la cartelera\n");
+	free(more_peliculas);
+	more_peliculas=NULL;
 
 }
 

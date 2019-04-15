@@ -61,7 +61,6 @@ void menuGestor()
 					Pelicula peli1;
 					int sesiones = 0;
 					double hora = 0.0;
-					char *cinema = malloc(TAMANYO_tit*sizeof(char));
 					char *titulo=malloc(TAMANYO_tit*sizeof(char));
 					char *descr = malloc(TAMANYO_descr*sizeof(char));
 					fflush(stdin);
@@ -73,6 +72,9 @@ void menuGestor()
 					peli1.titulo = strcpy(peli1.titulo, titulo);
 					printf("El titulo que has introducido es: %s\n", titulo);
 
+					free(titulo);
+					titulo=NULL;
+
 					fflush(stdin);
 
 					printf("Inserte la descripcion de la pelicula %s\n", peli1.titulo);
@@ -82,6 +84,9 @@ void menuGestor()
 					peli1.descripcion = malloc((strlen(descr)+1)*sizeof(char));
 					peli1.descripcion = strcpy(peli1.descripcion, descr);
 					printf("La descripcion que has introducido es: %s\n", descr);
+
+					free(descr);
+					descr=NULL;
 
 					printf("Cuantas sesiones diarias quiere tener de la pelicula %s?\n", peli1.titulo);
 					scanf("%i", &sesiones);
@@ -98,6 +103,8 @@ void menuGestor()
 					}
 
 					anyadirPelicula(&cartelerita, peli1);
+					free(nombrecart);
+					nombrecart=NULL;
 				}
 				else if (caracter2=='2')
 				{
@@ -134,6 +141,10 @@ void menuGestor()
 					}
 
 					ficheroCarteleraBorrado(cartelerita, indice);
+					free(titulo);
+					titulo=NULL;
+					free(titulo2);
+					titulo2=NULL;
 
 			}
 			else if(caracter2 == '3')
@@ -154,6 +165,7 @@ void menuGestor()
 		{
 			NuevaCartelera();
 		}
+
 	}
 	while(caracter!='q');
 }
@@ -231,7 +243,7 @@ void NuevaCartelera()
 		}
 		else
 		{
-			printf("!Error! Debe introducir un numero.!Vuelva a intentarlo!\n");
+			printf("¡Error! Debe introducir un numero.!Vuelva a intentarlo!\n");
 			menuGestor();
 		}
 	}

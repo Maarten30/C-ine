@@ -56,6 +56,9 @@ int main(void)
 				Cartelera cartel = leerCartelera(cine2);
 				imprimirCartelera(cartel);
 			}
+
+			free(cine);
+			cine=NULL;
 		}
 		else if(caracter == '2')
 		{
@@ -127,6 +130,10 @@ void comprarEntradas()
 				break;
 			}
 		}
+		free(titulo);
+		titulo = NULL;
+		free(titulo2);
+		titulo2 = NULL;
 		do
 		{
 			for(int j=0; j<cart.peliculas[indice].numSesiones; j++)
@@ -171,6 +178,9 @@ void comprarEntradas()
 		}while(numEntradas<=0 || numEntradas>cart.peliculas[indice].sesiones[indSesion].plazas);
 
 		ficheroCartelera(cart);
+
+		free(nombrecart);
+		nombrecart=NULL;
 
 	}
 }
