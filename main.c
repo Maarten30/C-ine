@@ -22,7 +22,7 @@ int main(void)
 	do
 	{
 		printf("Menu Principal: \n");
-		printf("1.- Cartelera\n2.- Compra de entradas\n3.- Pulse 'g' si eres gestor");
+		printf("1.- Ver cartelera\n2.- Compra de entradas\n3.- Pulse 'g' si eres gestor\n4.- Pulse 'q' para salir\n");
 		scanf(" %c", &caracter);
 		printf("%c\n", caracter);
 

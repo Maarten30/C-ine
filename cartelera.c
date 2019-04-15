@@ -22,7 +22,7 @@ void imprimirCartelera(Cartelera cart)
 		printf("Sesiones:\n");
 		for(int j=0; j<cart.peliculas[i].numSesiones; j++)
 		{
-			printf("Hora: %lf\n", cart.peliculas[i].sesiones[j].hora);
+			printf("Hora: %.2f\n", cart.peliculas[i].sesiones[j].hora);
 		}
 	}
 }

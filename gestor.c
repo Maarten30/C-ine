@@ -26,7 +26,7 @@ void menuGestor()
 	do
 	{
 		printf("Menu Gestor: \n");
-		printf("1.- Editar cartelera\n2.- Crear cartelera\n");
+		printf("1.- Editar cartelera\n2.- Crear cartelera\n3.- Pulse 'q' para volver a menu principal\n");
 		scanf(" %c", &caracter);
 		printf("%c\n", caracter);
 		if(caracter == '1')
