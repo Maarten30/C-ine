@@ -43,6 +43,7 @@ int main(void)
 			}
 
 			printf("EL nombre del cine es: %s\n", cine);
+
 			cartel = leerCartelera(cine);
 
 			imprimirCartelera(cartel);
@@ -60,9 +61,15 @@ int main(void)
 void comprarEntradas()
 {
 	char *nombrecart = malloc(TAMANYO_titulo*sizeof(char));
+	char *nombrecart2 = malloc(TAMANYO_titulo*sizeof(char));
+
+
+
 	printf("Elija el cine:\n");
 	scanf("%s", nombrecart);
 	printf("%s", nombrecart);
+
+	strcpy(nombrecart2, nombrecart);
 
 	for (int i = 0; i < strlen(nombrecart); i++)
 	{
@@ -71,7 +78,7 @@ void comprarEntradas()
 
 	strcat(nombrecart, "Cartelera.txt");
 	int existe = exists(nombrecart);
-	Cartelera cart = leerCartelera(nombrecart);
+	Cartelera cart = leerCartelera(nombrecart2);
 
 	if (existe ==0)
 	{
