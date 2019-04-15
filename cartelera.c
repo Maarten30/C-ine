@@ -14,17 +14,23 @@
 
 void imprimirCartelera(Cartelera cart)
 {
+	printf("\n");
+	printf("Cine: %s\n",cart.cine);
+	printf("--------------------------\n");
+
 	for (int i =0; i<cart.numPelis;i++)
 	{
-		printf("Cine: %s, Pelicula: %s, Descripcion: %s\n", cart.cine, (cart.peliculas[i]).titulo, (cart.peliculas[i]).descripcion);
+		printf("Pelicula: %s \nDescripcion: %s\n",  (cart.peliculas[i]).titulo, (cart.peliculas[i]).descripcion);
 
-		printf("Numero de sesiones en metodo es: %i\n", cart.peliculas[i].numSesiones);
 		printf("Sesiones:\n");
 		for(int j=0; j<cart.peliculas[i].numSesiones; j++)
 		{
-			printf("Hora: %.2f\n", cart.peliculas[i].sesiones[j].hora);
+			printf("Hora: %.2f ", cart.peliculas[i].sesiones[j].hora);
 		}
+		printf("\n");
+
 	}
+	printf("\n");
 }
 
 void ficheroCartelera(Cartelera cart)

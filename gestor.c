@@ -269,7 +269,7 @@ void NuevaCartelera()
 
 			for(int j=0; j<sesiones; j++)
 			{
-				printf("Introduzca la hora de la sesion %j:\n", i);
+				printf("Introduzca la hora de la sesion %i:\n", j+1);
 				scanf("%lf", &hora);
 				printf("Dentro del for la hora es %lf\n", hora);
 				cart->peliculas[i].sesiones[j].hora = hora;
