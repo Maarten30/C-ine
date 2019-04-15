@@ -15,9 +15,9 @@
 
 #define TAMANYO_tit 100
 #define TAMANYO_descr 200
+#define ISNUM(X) X >='0' && X <='9'
 
 void menuGestor()
-//el menuGestor creo que no deberia recibir una cartelera (opinion)
 {
 	char caracter;
 	char caracter2;
@@ -31,7 +31,7 @@ void menuGestor()
 		printf("%c\n", caracter);
 		if(caracter == '1')
 		{
-			printf("Elige el cine que quiera editar:\n");
+			printf("Elija el cine que quiera editar:\n");
 			char *nombrecart;
 			char *nombrecart2 = malloc(TAMANYO_tit*sizeof(char));
 			nombrecart = malloc(TAMANYO_tit*sizeof(char));
@@ -42,10 +42,6 @@ void menuGestor()
 			    nombrecart[i] = toupper(nombrecart[i]);
 			    nombrecart2[i] = toupper(nombrecart2[i]);
 			}
-			//toupper((unsigned char) *nombrecart);
-			printf("%s", nombrecart);
-			//strupr(nombrecart);
-			//strupr(nombrecart2);
 			strcat(nombrecart, "Cartelera.txt");
 			int existe = exists(nombrecart);
 
@@ -59,7 +55,6 @@ void menuGestor()
 				Cartelera cartelerita = leerCartelera(nombrecart2);
 				printf("1.- Anyadir pelicula \n2.- Retirar pelicula\n3.- Restaurar Plazas\n");
 				scanf(" %c", &caracter2);
-				printf("%c\n", caracter2);
 
 				if(caracter2 == '1')
 				{
@@ -71,15 +66,12 @@ void menuGestor()
 					char *descr = malloc(TAMANYO_descr*sizeof(char));
 					fflush(stdin);
 
-
-
 					printf("Inserte el nombre de la pelicula que desee anyadir\n");
 
 					scanf(" %[^\t\n]s", titulo);
 					peli1.titulo = malloc((strlen(titulo)+1)*sizeof(char));
 					peli1.titulo = strcpy(peli1.titulo, titulo);
 					printf("El titulo que has introducido es: %s\n", titulo);
-
 
 					fflush(stdin);
 
@@ -101,15 +93,11 @@ void menuGestor()
 					{
 						printf("Introduzca la hora de la sesion %i:\n", i);
 						scanf("%lf", &hora);
-						printf("Dentro del for la hora es %lf\n", hora);
 						peli1.sesiones[i].hora = hora;
 						peli1.sesiones[i].plazas = 22;
 					}
 
-					printf("La primera sesion es a las %lf\n", peli1.sesiones[0].hora);
-
 					anyadirPelicula(&cartelerita, peli1);
-	//				anyadirPelicula(carte, peli);
 				}
 				else if (caracter2=='2')
 				{
@@ -123,15 +111,12 @@ void menuGestor()
 					}
 
 					char *titulo = malloc(sizeof(char)*TAMANYO_tit);
-					printf("Asd\n");
 					scanf(" %[^\t\n]s", titulo);
 
-					printf("dfs2\n");
 					for (int i = 0; i < strlen(titulo); i++)
 					{
 						titulo[i] = toupper(titulo[i]);
 					}
-					printf("dfs\n");
 					char *titulo2= malloc(sizeof(char)*TAMANYO_tit);
 
 					for(int i=0; i<cartelerita.numPelis; i++)
@@ -144,15 +129,14 @@ void menuGestor()
 						if(strcmp(titulo, titulo2) == 0)
 						{
 							indice=i;
-							printf("El indice es %i", indice);
 							break;
 						}
 					}
 
 					ficheroCarteleraBorrado(cartelerita, indice);
-					printf("mahandy\n");
 
-			}else if(caracter2 == '3')
+			}
+			else if(caracter2 == '3')
 			{
 				for(int i=0; i<cartelerita.numPelis; i++)
 				{
@@ -164,23 +148,18 @@ void menuGestor()
 
 				ficheroCartelera(cartelerita);
 			}
-
 			}
 		}
 		else if(caracter == '2')
 		{
-
 			NuevaCartelera();
-
 		}
 	}
 	while(caracter!='q');
-
 }
 
 void NuevaCartelera()
 {
-
 	Cartelera *cart = malloc(sizeof(Cartelera));
 
 	char cine[TAMANYO_tit];
@@ -196,72 +175,66 @@ void NuevaCartelera()
 	}
 	else
 	{
-		int numPelis = 0;
+		char numPelis[20];
+		int numPelis2;
 		printf("Introduzca el numero de peliculas que desea anyadir a la cartelera: \n");
-		scanf("%i", &numPelis);
-
-		cart->cine = malloc (sizeof(char)*TAMANYO_tit);
-		strcpy(cart->cine, cine);
-
-
-
-		cart->numPelis = numPelis;
-
-		cart->peliculas = malloc(sizeof(Pelicula)*numPelis);
-
-
-
-		char titulo[TAMANYO_tit];
-		char desc[TAMANYO_descr];
-		int longitud = 0;
-		int longitud2 = 0;
-		int sesiones = 0;
-		double hora = 0.0;
-
-		for(int i=0; i<cart->numPelis; i++)
+		scanf("%s", numPelis);
+		numPelis2 = atoi(numPelis);
+		if (numPelis2!=0)
 		{
+			cart->cine = malloc (sizeof(char)*TAMANYO_tit);
+			strcpy(cart->cine, cine);
 
-			printf("Introduzca el titulo de la pelicula: \n");
-			scanf(" %[^\t\n]s", titulo);
-			longitud = strlen(titulo);
-			printf("%i\n", longitud);
+			cart->numPelis = numPelis2;
 
-			printf("Introduzca una breve descripcion sobre la pelicula: \n");
-			scanf(" %[^\t\n]s", desc);
-			longitud2 = strlen(desc);
+			cart->peliculas = malloc(sizeof(Pelicula)*numPelis2);
 
-			printf("Cuantas sesiones diarias quiere tener de la pelicula %s?\n", titulo);
-			scanf("%i", &sesiones);
+			char titulo[TAMANYO_tit];
+			char desc[TAMANYO_descr];
+			int longitud = 0;
+			int longitud2 = 0;
+			int sesiones = 0;
+			double hora = 0.0;
 
-			cart->peliculas[i].sesiones = malloc(sizeof(Sesion)*sesiones);
-			cart->peliculas[i].numSesiones = sesiones;
-
-			for(int j=0; j<sesiones; j++)
+			for(int i=0; i<cart->numPelis; i++)
 			{
-				printf("Introduzca la hora de la sesion %i:\n", j+1);
-				scanf("%lf", &hora);
-				printf("Dentro del for la hora es %lf\n", hora);
-				cart->peliculas[i].sesiones[j].hora = hora;
-				cart->peliculas[i].sesiones[j].plazas = 22;
+				printf("Introduzca el titulo de la pelicula: \n");
+				scanf(" %[^\t\n]s", titulo);
+				longitud = strlen(titulo);
+
+				printf("Introduzca una breve descripcion sobre la pelicula: \n");
+				scanf(" %[^\t\n]s", desc);
+				longitud2 = strlen(desc);
+
+				printf("Cuantas sesiones diarias quiere tener de la pelicula %s?\n", titulo);
+				scanf("%i", &sesiones);
+
+				cart->peliculas[i].sesiones = malloc(sizeof(Sesion)*sesiones);
+				cart->peliculas[i].numSesiones = sesiones;
+
+				for(int j=0; j<sesiones; j++)
+				{
+					printf("Introduzca la hora de la sesion %i:\n", j+1);
+					scanf("%lf", &hora);
+					cart->peliculas[i].sesiones[j].hora = hora;
+					cart->peliculas[i].sesiones[j].plazas = 22;
+				}
+
+				cart->peliculas[i].titulo= malloc (sizeof(char)*(longitud+1));
+				cart->peliculas[i].descripcion = malloc (sizeof(char)*(longitud2+1));
+
+				strcpy(cart->peliculas[i].titulo, titulo);
+				strcpy(cart->peliculas[i].descripcion, desc);
+
 			}
-
-
-
-
-			cart->peliculas[i].titulo= malloc (sizeof(char)*(longitud+1));
-			cart->peliculas[i].descripcion = malloc (sizeof(char)*(longitud2+1));
-
-			strcpy(cart->peliculas[i].titulo, titulo);
-			strcpy(cart->peliculas[i].descripcion, desc);
-
+			ficheroCartelera(*cart);
 		}
-
-		printf("La primera sesion es a las %lf\n", cart->peliculas[0].sesiones[0].hora);
-
-		ficheroCartelera(*cart);
-
+		else
+		{
+			printf("!Error! Debe introducir un numero.!Vuelva a intentarlo!\n");
+			menuGestor();
+		}
 	}
-
 }
 
 int exists(const char *fname)
