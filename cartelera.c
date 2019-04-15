@@ -36,8 +36,6 @@ void ficheroCartelera(Cartelera cart)
 
 	printf("La hora de irse a casa es: %lf\n", cart.peliculas[8].sesiones[0].hora);
 
-
-
 	strcpy(cine, cart.cine);
 	for (int i = 0; i < strlen(cine); i++)
 	{
@@ -59,7 +57,6 @@ void ficheroCartelera(Cartelera cart)
 	fprintf(f, cart.cine);
 	fprintf(f, "\n");
 
-
 	for(int i=0; i<cart.numPelis; i++)
 	{
 
@@ -79,13 +76,10 @@ void ficheroCartelera(Cartelera cart)
 		}
 
 		fprintf(f, "\n");
-
 	}
-
 	fclose(f);
-
-
 }
+
 Cartelera leerCartelera(char *cine)
 {
 	Cartelera cart;
@@ -95,9 +89,6 @@ Cartelera leerCartelera(char *cine)
 	//int lonCharCine;
 	int numPelis = 0;
 	int contador = 0;
-
-
-
 
 	strcpy(fichero, cine);
 	strcat(fichero, "Cartelera.txt");
@@ -141,8 +132,6 @@ Cartelera leerCartelera(char *cine)
 		printf("%s\n", buff);
 		strcpy(cart.peliculas[i].descripcion,buff);
 
-
-
 //		c = fgetc(f);
 //		printf("EL char es: %c", c);
 //		int x = c - '0';
@@ -160,14 +149,8 @@ Cartelera leerCartelera(char *cine)
 			fscanf(f, "%lf", &hora);
 			cart.peliculas[i].sesiones[j].hora = hora;
 		}
-
-
 	}
-
-
-
 	return cart;
-
 }
 
 void anyadirPelicula(Cartelera *cartelera, Pelicula peli)
@@ -205,15 +188,11 @@ void anyadirPelicula(Cartelera *cartelera, Pelicula peli)
 		}
 	}
 
-
 	cartelera->peliculas = more_peliculas;
 
 	printf("Dime la horaa: %lf", cartelera->peliculas[6].sesiones[0].hora);
 
-
 	ficheroCartelera(*cartelera);
-
-
 
 	printf("La pelicula se ha anyadido a la cartelera\n");
 
@@ -265,21 +244,13 @@ void ficheroCarteleraBorrado(Cartelera cart, int index)
 
 			for(int j=0; j<cart.peliculas[i].numSesiones; j++)
 			{
-
 				fprintf(f, "%lf ", cart.peliculas[i].sesiones[j].hora);
-
 			}
-
 			fprintf(f, "\n");
 		}
-
-
-
 	}
 
 	fclose(f);
-
-
 }
 
 int lineasFichero(char *fichero)

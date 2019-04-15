@@ -17,28 +17,12 @@ void comprarEntradas();
 
 int main(void)
 {
-
-//	Cartelera cart;
-//
-//	cart.cine = "urbil";
-//	cart.numPelis = 2;
-//
-//	cart.peliculas = malloc (sizeof(Pelicula)*2);
-//
-//	cart.peliculas[0].titulo = "Interstellar";
-//	cart.peliculas[0].descripcion = "Va de estrellas";
-//	cart.peliculas[1].titulo = "Bambi";
-//	cart.peliculas[1].descripcion = "Va de un ciervo";
-//
-//	printf("Llega aqui\n");
-//	printf("%s\n", cart.peliculas[0].titulo);
-
 	char caracter;
 
 	do
 	{
 		printf("Menu Principal: \n");
-		printf("1.- Cartelera\n2.- Compra de entradas\n");
+		printf("1.- Cartelera\n2.- Compra de entradas\n3.- Pulse 'g' si eres gestor");
 		scanf(" %c", &caracter);
 		printf("%c\n", caracter);
 
@@ -48,9 +32,8 @@ int main(void)
 		}
 		else if(caracter == '1')
 		{
-			char *cine;
-			printf("Elija el cine del que desea ver la cartelera: ");
-
+			char *cine = malloc(TAMANYO_titulo*sizeof(char));
+			printf("Elija el cine del que desea ver la cartelera:\n");
 			scanf("%s", cine);
 
 			Cartelera cartel;
@@ -59,7 +42,7 @@ int main(void)
 				cine[i] = toupper(cine[i]);
 			}
 
-			printf("EL nombre del cine es: %s", cine);
+			printf("EL nombre del cine es: %s\n", cine);
 			cartel = leerCartelera(cine);
 
 			imprimirCartelera(cartel);
