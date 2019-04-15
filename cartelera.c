@@ -39,18 +39,12 @@ void ficheroCartelera(Cartelera cart)
 	FILE *f;
 	char cine[100];
 
-	printf("Llega aqui2\n");
-
-
 	strcpy(cine, cart.cine);
 	for (int i = 0; i < strlen(cine); i++)
 	{
 		cine[i] = toupper(cine[i]);
 	}
-	//strupr(cine);
 	strcat(cine, "Cartelera.txt");
-
-	printf("Llega aqui3\n");
 
 	f = fopen(cine, "w+");
 
@@ -58,27 +52,22 @@ void ficheroCartelera(Cartelera cart)
 
 	int lonCharCine = strlen(cine2);
 
-	printf("Llega aqui4\n");
-
 	fprintf(f, cart.cine);
 	fprintf(f, "\n");
 
 	for(int i=0; i<cart.numPelis; i++)
 	{
-
 		fprintf(f, "%s", cart.peliculas[i].titulo);
 		fprintf(f, "\n");
 		fprintf(f, "%s", cart.peliculas[i].descripcion);
 		fprintf(f, "\n");
 
 		fprintf(f, "%i ", cart.peliculas[i].numSesiones);
-		printf("El numero de sesionazas es: %i\n", cart.peliculas[i].numSesiones);
 
 		for(int j=0; j<cart.peliculas[i].numSesiones; j++)
 		{
 			fprintf(f, "%i ", cart.peliculas[i].sesiones[j].plazas);
 			fprintf(f, "%lf ", cart.peliculas[i].sesiones[j].hora);
-			printf("La hora de irse a casa es: %lf\n", cart.peliculas[i].sesiones[j].hora);
 		}
 
 		fprintf(f, "\n");
@@ -90,29 +79,17 @@ Cartelera leerCartelera(char *cine)
 {
 	Cartelera cart;
 	FILE *f;
-	char ch;
 	char fichero[100];
-	//int lonCharCine;
 	int numPelis = 0;
-	int contador = 0;
 
 	strcpy(fichero, cine);
 	strcat(fichero, "Cartelera.txt");
 
-	int boolean = exists(fichero);
-
-	printf("El resultado es: %i\n", boolean);
-
-	printf("el  nombre de la cartelera es: %s\n", fichero);
-
 	f = fopen(fichero, "r");
-
-	//lonCharCine = ch - '0';
 
 	cart.cine = malloc(sizeof(char)*TAMANYO_tit);
 
 	numPelis = (lineasFichero(fichero)-1)/3;
-	printf("el numero de pelis es %i\n", numPelis);
 	cart.numPelis = numPelis;
 
 	cart.peliculas = malloc(sizeof(Pelicula)*numPelis);
@@ -121,34 +98,24 @@ Cartelera leerCartelera(char *cine)
 	double hora=0.0;
 	int plazas = 0;
 	int numSesiones = 0;
-	char c;
 
 	fscanf(f, "%s", buff);
 	strcpy(cart.cine, buff);
 
 	for(int i=0; i<numPelis; i++)
 	{
-		printf("aquiiii\n");
 		cart.peliculas[i].titulo = malloc (sizeof(char)*TAMANYO_tit);
 		fscanf(f, " %[^\t\n]s", buff);
 		strcpy(cart.peliculas[i].titulo,buff);
 
-		printf("aquiiii2\n");
 		cart.peliculas[i].descripcion = malloc (sizeof(char)*TAMANYO_descr);
 		fscanf(f, " %[^\t\n]s", buff);
-		printf("%s\n", buff);
 		strcpy(cart.peliculas[i].descripcion,buff);
-
-//		c = fgetc(f);
-//		printf("EL char es: %c", c);
-//		int x = c - '0';
 
 		fscanf(f, "%d", &numSesiones);
 
-
 		cart.peliculas[i].numSesiones = numSesiones;
 
-		printf("El numero de sesioncitas es: %i\n", numSesiones);
 		cart.peliculas[i].sesiones = (Sesion*)malloc (sizeof(Sesion)*numSesiones);
 
 		for(int j=0; j<numSesiones;j++)
@@ -157,7 +124,6 @@ Cartelera leerCartelera(char *cine)
 			fscanf(f, "%lf", &hora);
 			cart.peliculas[i].sesiones[j].plazas = plazas;
 			cart.peliculas[i].sesiones[j].hora = hora;
-
 		}
 	}
 	return cart;
@@ -173,8 +139,6 @@ void anyadirPelicula(Cartelera *cartelera, Pelicula peli)
 	Pelicula *more_peliculas = realloc(cartelera->peliculas, aux*sizeof(Pelicula));
 	cartelera->numPelis = cartelera->numPelis+1;
 
-
-
 	for(int i = 0; i<cartelera->numPelis; i++)
 	{
 		if (i==aux2)
@@ -187,7 +151,6 @@ void anyadirPelicula(Cartelera *cartelera, Pelicula peli)
 			strcpy(more_peliculas[i].descripcion, peli.descripcion);
 			more_peliculas[i].sesiones = malloc(sizeof(Sesion)*peli.numSesiones);
 			more_peliculas[i].numSesiones = peli.numSesiones;
-			printf("El numero de seeees es %i\n", peli.numSesiones);
 			for(int j=0; j<peli.numSesiones; j++)
 			{
 				more_peliculas[i].sesiones[j].hora=peli.sesiones[j].hora;
@@ -200,7 +163,7 @@ void anyadirPelicula(Cartelera *cartelera, Pelicula peli)
 
 	cartelera->peliculas = more_peliculas;
 
-	printf("Dime la horaa: %lf", cartelera->peliculas[6].sesiones[0].hora);
+	printf("Dime la hora: %lf", cartelera->peliculas[6].sesiones[0].hora);
 
 	ficheroCartelera(*cartelera);
 
@@ -214,18 +177,12 @@ void ficheroCarteleraBorrado(Cartelera cart, int index)
 	FILE *f;
 	char cine[100];
 
-	printf("Llega aqui2\n");
-
-
 	strcpy(cine, cart.cine);
 	for (int i = 0; i < strlen(cine); i++)
 	{
 		cine[i] = toupper(cine[i]);
 	}
-	//strupr(cine);
 	strcat(cine, "Cartelera.txt");
-
-	printf("Llega aqui3\n");
 
 	f = fopen(cine, "w+");
 
@@ -233,16 +190,11 @@ void ficheroCarteleraBorrado(Cartelera cart, int index)
 
 	int lonCharCine = strlen(cine2);
 
-	printf("Llega aqui4\n");
-
 	fprintf(f, cart.cine);
 	fprintf(f, "\n");
 
-
 	for(int i=0; i<cart.numPelis; i++)
 	{
-
-		printf("El index es %i", index);
 		if(i!=index)
 		{
 			fprintf(f, "%s", cart.peliculas[i].titulo);
@@ -283,7 +235,6 @@ int lineasFichero(char *fichero)
         chr = getc(fileptr);
     }
     fclose(fileptr); //close file.
-    printf("There are %d lines in in a file\n", count_lines);
 
     return count_lines;
 }
