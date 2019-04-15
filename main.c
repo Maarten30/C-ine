@@ -32,18 +32,30 @@ int main(void)
 		else if(caracter == '1')
 		{
 			char *cine = malloc(TAMANYO_titulo*sizeof(char));
+			char *cine2 = malloc(TAMANYO_titulo*sizeof(char));
+
 			printf("Elija el cine del que desea ver la cartelera:\n");
 			scanf("%s", cine);
 
-			Cartelera cartel;
+			strcpy(cine2, cine);
+
 			for (int i = 0; i < strlen(cine); i++)
 			{
 				cine[i] = toupper(cine[i]);
 			}
 
-			cartel = leerCartelera(cine);
+			strcat(cine, "Cartelera.txt");
+			int existe = exists(cine);
 
-			imprimirCartelera(cartel);
+			if(existe == 0)
+			{
+				printf("El cine introducido no existe, vuelva a intentarlo\n");
+			}
+			else
+			{
+				Cartelera cartel = leerCartelera(cine2);
+				imprimirCartelera(cartel);
+			}
 		}
 		else if(caracter == '2')
 		{
@@ -71,7 +83,6 @@ void comprarEntradas()
 
 	strcat(nombrecart, "Cartelera.txt");
 	int existe = exists(nombrecart);
-	Cartelera cart = leerCartelera(nombrecart2);
 
 	if (existe ==0)
 	{
@@ -80,6 +91,8 @@ void comprarEntradas()
 	}
 	else
 	{
+		Cartelera cart = leerCartelera(nombrecart2);
+
 		int indice=0;
 		int indSesion=-1;
 		int numEntradas=0;
