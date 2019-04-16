@@ -168,7 +168,6 @@ void comprarEntradas()
 			}
 			if(numEntradas<=cart.peliculas[indice].sesiones[indSesion].plazas && numEntradas>0)
 			{
-				cart.peliculas[indice].sesiones[indSesion].plazas = cart.peliculas[indice].sesiones[indSesion].plazas-numEntradas;
 				printf("La compra se ha realizado correctamente\n");
 			}
 			if(numEntradas>cart.peliculas[indice].sesiones[indSesion].plazas)
@@ -176,6 +175,8 @@ void comprarEntradas()
 				printf("La plazas disponibles son unicamente de: %i\n", cart.peliculas[indice].sesiones[indSesion].plazas);
 			}
 		}while(numEntradas<=0 || numEntradas>cart.peliculas[indice].sesiones[indSesion].plazas);
+
+		cart.peliculas[indice].sesiones[indSesion].plazas = cart.peliculas[indice].sesiones[indSesion].plazas-numEntradas;
 
 		ficheroCartelera(cart);
 

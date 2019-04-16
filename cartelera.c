@@ -154,7 +154,6 @@ void anyadirPelicula(Cartelera *cartelera, Pelicula peli)
 			for(int j=0; j<peli.numSesiones; j++)
 			{
 				more_peliculas[i].sesiones[j].hora=peli.sesiones[j].hora;
-				printf("La sesion tiene una hora de: %.2f\n", peli.sesiones[j].hora);
 				more_peliculas[i].sesiones[j].plazas=peli.sesiones[j].plazas;
 
 			}

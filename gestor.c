@@ -70,7 +70,6 @@ void menuGestor()
 					scanf(" %[^\t\n]s", titulo);
 					peli1.titulo = malloc((strlen(titulo)+1)*sizeof(char));
 					peli1.titulo = strcpy(peli1.titulo, titulo);
-					printf("El titulo que has introducido es: %s\n", titulo);
 
 					free(titulo);
 					titulo=NULL;
@@ -83,7 +82,6 @@ void menuGestor()
 
 					peli1.descripcion = malloc((strlen(descr)+1)*sizeof(char));
 					peli1.descripcion = strcpy(peli1.descripcion, descr);
-					printf("La descripcion que has introducido es: %s\n", descr);
 
 					free(descr);
 					descr=NULL;
@@ -96,7 +94,7 @@ void menuGestor()
 
 					for(int i=0; i<sesiones; i++)
 					{
-						printf("Introduzca la hora de la sesion %i:\n", i);
+						printf("Introduzca la hora de la sesion %i:\n", i+1);
 						scanf("%lf", &hora);
 						peli1.sesiones[i].hora = hora;
 						peli1.sesiones[i].plazas = 22;
@@ -243,7 +241,7 @@ void NuevaCartelera()
 		}
 		else
 		{
-			printf("¡Error! Debe introducir un numero.!Vuelva a intentarlo!\n");
+			printf("ï¿½Error! Debe introducir un numero.!Vuelva a intentarlo!\n");
 			menuGestor();
 		}
 	}
