@@ -20,7 +20,8 @@ void imprimirCartelera(Cartelera cart)
 
 	for (int i =0; i<cart.numPelis;i++)
 	{
-		printf("Pelicula: %s \nDescripcion: %s\n",  (cart.peliculas[i]).titulo, (cart.peliculas[i]).descripcion);
+		printf("Pelicula %i: ", i+1);
+		imprimirPelicula(cart.peliculas[i]);
 
 		printf("Sesiones:\n");
 		for(int j=0; j<cart.peliculas[i].numSesiones; j++)
@@ -28,6 +29,7 @@ void imprimirCartelera(Cartelera cart)
 			printf("Hora: %.2f, ", cart.peliculas[i].sesiones[j].hora);
 			printf("Sitios libres: %i || ", cart.peliculas[i].sesiones[j].plazas);
 		}
+		printf("\n");
 		printf("\n");
 
 	}
@@ -99,7 +101,7 @@ Cartelera leerCartelera(char *cine)
 	int plazas = 0;
 	int numSesiones = 0;
 
-	fscanf(f, "%s", buff);
+	fscanf(f, " %[^\t\n]s", buff);
 	strcpy(cart.cine, buff);
 
 	for(int i=0; i<numPelis; i++)

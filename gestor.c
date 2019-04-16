@@ -28,7 +28,6 @@ void menuGestor()
 		printf("Menu Gestor: \n");
 		printf("1.- Editar cartelera\n2.- Crear cartelera\n3.- Pulse 'q' para volver a menu principal\n");
 		scanf(" %c", &caracter);
-		printf("%c\n", caracter);
 		if(caracter == '1')
 		{
 			printf("Elija el cine que quiera editar:\n");
@@ -175,7 +174,7 @@ void NuevaCartelera()
 	char cine[TAMANYO_tit];
 	char aux[TAMANYO_tit];
 	printf("Introduzca el nombre del cine: \n");
-	scanf("%s", aux);
+	scanf(" %[^\t\n]s", aux);
 	strcpy(cine,aux);
 	int existe = exists(strcat(aux, "Cartelera.txt"));
 	if (existe ==1)
@@ -208,7 +207,7 @@ void NuevaCartelera()
 
 			for(int i=0; i<cart->numPelis; i++)
 			{
-				printf("Introduzca el titulo de la pelicula: \n");
+				printf("Introduzca el titulo de la pelicula %i: \n", i+1);
 				scanf(" %[^\t\n]s", titulo);
 				longitud = strlen(titulo);
 

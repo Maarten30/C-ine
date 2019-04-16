@@ -35,7 +35,7 @@ int main(void)
 			char *cine2 = malloc(TAMANYO_titulo*sizeof(char));
 
 			printf("Elija el cine del que desea ver la cartelera:\n");
-			scanf("%s", cine);
+			scanf(" %[^\t\n]s", cine);
 
 			strcpy(cine2, cine);
 
